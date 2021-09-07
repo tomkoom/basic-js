@@ -14,14 +14,34 @@ import { NotImplementedError } from '../extensions/index.js';
  *
  */
 export default function createDreamTeam(/* members */) {
-  let names = Array.from(arguments).flat();
-  names = names.filter(n => typeof n === 'string');
+  let names = Array.from(arguments)
+    .flat()
+    .filter(n => typeof n === 'string')
+    .map(n => n.toUpperCase());
   let res = [];
 
   for (let i = 0; i < names.length; i++) {
-    res.push(names[i].charAt(0));
+    if (names[i].includes(' ')) {
+      res.push(names[i].split(' ').join('').charAt(0));
+
+    } else res.push(names[i].charAt(0));
   }
+
   return res.sort().join('');
 }
 
-// console.log(createDreamTeam(['Olivia', 1111, 'Lily', 'Oscar', true, null]));
+// console.log(createDreamTeam([
+//   ['David Abram'],
+//   ['Robin Attfield'],
+//   'Thomas Berry',
+//   ['Paul R.Ehrlich'],
+//   'donna Haraway',
+//   ' BrIaN_gOodWiN  ',
+//   {
+//     0: 'Serenella Iovino'
+//   },
+//   'Erazim Kohak',
+//   '  val_plumwood',
+// ]));
+
+//BDETV
